@@ -216,7 +216,7 @@ setInterval(() => {
   let topic = ""
   listeProfiles.sort((a, b) => parseInt(hexToInt(a.money)) < parseInt(hexToInt(b.money)) ? 1 : -1).slice(0, 10)
   for (let i = 0; i < listeProfiles.length; i++) {
-    topic = topic  + (`${listeProfiles[i].name}: ${numberWithCommas(parseInt(hexToInt(listeProfiles[i].money)))}$, `) 
+    topic = topic  + (`${listeProfiles[i].name}: ${approx(parseInt(hexToInt(listeProfiles[i].money)) , {separator: " ", min10k: true, capital: true, decimal: 2})}$ | `) 
   }
 
   bot.channels.cache.get(infoChanOff == undefined ? infoChanTest : infoChanOff).setTopic(topic)
