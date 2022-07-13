@@ -404,7 +404,7 @@ bot.on("message", async (message) => {
       number = parseInt(args[0])
     }else {
 
-      args[0] = args[0].toLowerCase
+      args[0] = args[0].toLowerCase()
       if(args[0] != "max") {
         x--
       }
