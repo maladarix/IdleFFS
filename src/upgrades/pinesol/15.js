@@ -1,4 +1,4 @@
-class quinz {
+class quinze {
 
   constructor(profil) {
     this.data = {
@@ -15,4 +15,4 @@ class quinz {
   }
 }
 
-module.exports = quinz
+module.exports = quinze

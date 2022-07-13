@@ -13,12 +13,18 @@ const douze = require('./pinesol/12')
 const treize = require('./pinesol/13')
 const quatorze = require('./pinesol/14')
 const quinze = require('./pinesol/15')
+const seize = require('./familys/16')
+const dixsept = require('./familys/17')
+const dixhuit = require('./familys/18')
+const dixneuf = require('./familys/19')
+const vingt = require('./familys/20')
 
 class upgrade{
 
   getAll(profil){
     return [this.getUn(profil), this.getDeux(profil), this.getTrois(profil), this.getQuatre(profil), this.getCinq(profil), this.getSix(profil), this.getSept(profil), this.getHuit(profil),
-    this.getNeuf(profil), this.getDix(profil), this.getOnze(profil), this.getDouze(profil), this.getTreize(profil), this.getQuatorze(profil), this.getQuinze(profil)]
+    this.getNeuf(profil), this.getDix(profil), this.getOnze(profil), this.getDouze(profil), this.getTreize(profil), this.getQuatorze(profil), this.getQuinze(profil), this.getSeize(profil), 
+    this.getDixsept(profil), this.getDixhuit(profil), this.getDixneuf(profil), this.getVingt(profil)]
   }
 
   getUn(profil){
@@ -79,6 +85,26 @@ class upgrade{
 
   getQuinze(profil){
     return new quinze(profil)
+  }
+
+  getSeize(profil){
+    return new seize(profil)
+  }
+
+  getDixsept(profil){
+    return new dixsept(profil)
+  }
+
+  getDixhuit(profil){
+    return new dixhuit(profil)
+  }
+
+  getDixneuf(profil){
+    return new dixneuf(profil)
+  }
+
+  getVingt(profil){
+    return new vingt(profil)
   }
 }
 

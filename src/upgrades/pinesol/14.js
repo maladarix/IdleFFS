@@ -5,7 +5,7 @@ class quatorze {
       cost: 550000000000000,
       bonus: 0.5,
     }
-    this.type = "orange"
+    this.type = "pine"
     this.bonusType = "cost"
     this.effect = "Divise coût par 2 de Pine sol"
     this.cond = profil.pine.number >= 200
