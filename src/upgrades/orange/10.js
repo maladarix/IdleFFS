@@ -11,7 +11,7 @@ class dix {
     this.cond = profil.orange.number >= 400
     this.err = "Tu dois avoir au moins 400 Orange glo pour acheter cet object."
     this.id = 10
-    this.name = "Encore plus d'orange glo?!"
+    this.name = "Encore plus d'orange glo?! (400)"
   }
 }
 

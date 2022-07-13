@@ -11,7 +11,7 @@ class deux {
     this.cond = profil.snigger.number >= 50
     this.err = "Tu dois avoir au moins 50 sniggers pour acheter cet object."
     this.id = 2
-    this.name = "Double Snigger (2e)"
+    this.name = "Double Snigger (50)"
   }
 }
 

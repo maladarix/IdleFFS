@@ -11,7 +11,7 @@ class huit {
     this.cond = profil.orange.number >= 100
     this.err = "Tu dois avoir au moins 100 Orange glo pour acheter cet object."
     this.id = 8
-    this.name = "x5 sur Orange glo"
+    this.name = "x5 sur Orange glo (100)"
   }
 }
 

@@ -11,7 +11,7 @@ class vingt {
       this.cond = profil.familys.number >= 400
       this.err = "Tu dois avoir au moins 400 Family's bot pour acheter cet object."
       this.id = 20
-      this.name = "Encore plus de Family's bot?!"
+      this.name = "Encore plus de Family's bot?! (400)"
     }
   }
   

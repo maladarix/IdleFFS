@@ -11,7 +11,7 @@ class dixhuit {
       this.cond = profil.familys.number >= 100
       this.err = "Tu dois avoir au moins 100 Family's bot pour acheter cet object."
       this.id = 18
-      this.name = "x5 sur Family's bot"
+      this.name = "x5 sur Family's bot (100)"
     }
   }
   

@@ -11,7 +11,7 @@ class six {
     this.cond = profil.orange.number >= 10
     this.err = "Tu dois avoir au moins 10 Orange glo pour acheter cet object."
     this.id = 6
-    this.name = "Double Orange glo"
+    this.name = "Double Orange glo (10)"
   }
 }
 

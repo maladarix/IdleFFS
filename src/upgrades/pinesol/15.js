@@ -11,7 +11,7 @@ class quinze {
     this.cond = profil.pine.number >= 400
     this.err = "Tu dois avoir au moins 400 Pine sol pour acheter cet object."
     this.id = 15
-    this.name = "Encore plus de Pine sol?!"
+    this.name = "Encore plus de Pine sol?! (400)"
   }
 }
 

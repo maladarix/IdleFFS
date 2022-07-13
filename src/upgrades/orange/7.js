@@ -11,7 +11,7 @@ class sept {
     this.cond = profil.orange.number >= 50
     this.err = "Tu dois avoir au moins 50 Orange glo pour acheter cet object."
     this.id = 7
-    this.name = "Double Orange glo (2e)"
+    this.name = "Double Orange glo (50)"
   }
 }
 

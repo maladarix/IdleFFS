@@ -11,7 +11,7 @@ class treize {
     this.cond = profil.pine.number >= 100
     this.err = "Tu dois avoir au moins 100 Pine sol pour acheter cet object."
     this.id = 13
-    this.name = "x5 sur Pine sol"
+    this.name = "x5 sur Pine sol (100)"
   }
 }
 
