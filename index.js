@@ -403,6 +403,8 @@ bot.on("message", async (message) => {
     if(!isNaN(parseInt(args[0]))) {
       number = parseInt(args[0])
     }else {
+
+      args[0] = args[0].toLowerCase
       if(args[0] != "max") {
         x--
       }
