@@ -28,9 +28,9 @@ class Profil {
     this.pot = {number: 0, multi:1 , data: item.prototype.getMayo().data}
     this.gwen = {number: 0, multi:1 , data: item.prototype.getGwen().data}
     this.fringale = {number: 0, multi:1 , data: item.prototype.getFringale().data}
-    this.rémi = {number: 0, multi:1 , data: item.prototype.getRemi().data}
-    this.céréales = {number: 0, multi:1 , data: item.prototype.getCéréales().data}
-    this.évier = {number: 0, multi:1 , data: item.prototype.getÉvier().data}
+    this.remi = {number: 0, multi:1 , data: item.prototype.getRemi().data}
+    this.cereales = {number: 0, multi:1 , data: item.prototype.getCéréales().data}
+    this.evier = {number: 0, multi:1 , data: item.prototype.getÉvier().data}
     this.penis ={number: 0, multi:1 , data: item.prototype.getPenis().data}
     this.dieu = {number: 0, multi:1 , data: item.prototype.getBilou().data}
     this.biscuit = {number: 0, multi:1 , data: item.prototype.getBiscuit().data}

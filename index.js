@@ -14,7 +14,7 @@ let colorVert = "#57F287"
 let colorTurq = "#00ffdd"    
 let colorJaune = "#F1C40F"               //test                //vrai
 let infoChanOff = "990098889275244554" //828518673244618752  990098889275244554
-let liste = ["snigger", "orange", "pine", "familys", "cocomb", "douchebag", "corolla", "bagarreur", "coureur", "remparts", "pot", "gwen", "fringale", "rémi", "céréales", "évier", "penis", "dieu", "biscuit", "carte"]
+let liste = ["snigger", "orange", "pine", "familys", "cocomb", "douchebag", "corolla", "bagarreur", "coureur", "remparts", "pot", "gwen", "fringale", "remi", "cereales", "evier", "penis", "dieu", "biscuit", "carte"]
 let listeFarm = ["snigger ", "orange glo", "pine sol" , "familys bot", "cocomb ", "douchebag ", "corolla ", "bagarreur ", "coureur bois", "remparts ", "pot mayo", "gwen ", "fringale ", "rémi ", "céréales ", "évier pisse", "penis ", "dieu bilou", "biscuit chateau", "carte inspire"]
 let listeProfiles = []
 let lastProfilMsg = null
@@ -166,7 +166,7 @@ setInterval(() => {
 
     let profit = parseFloat((((roles.prototype.getSnigger().data.profit * profil.snigger.multi) * profil.snigger.number) + (roles.prototype.getOrange().data.profit * profil.orange.number) + (roles.prototype.getPine().data.profit * profil.pine.number) + (roles.prototype.getFamily().data.profit * profil.familys.number) + (roles.prototype.getCocomb().data.profit * profil.cocomb.number)
       + (roles.prototype.getDouchebag().data.profit * profil.douchebag.number) + (roles.prototype.getCorolla().data.profit * profil.corolla.number) + (roles.prototype.getBagarreur().data.profit * profil.bagarreur.number) + (roles.prototype.getCoureur().data.profit * profil.coureur.number) + (roles.prototype.getRemparts().data.profit * profil.remparts.number)
-      + (roles.prototype.getMayo().data.profit * profil.pot.number) + (roles.prototype.getGwen().data.profit * profil.gwen.number) + (roles.prototype.getFringale().data.profit * profil.fringale.number) + (roles.prototype.getRemi().data.profit * profil.rémi.number) + (roles.prototype.getCéréales().data.profit * profil.céréales.number) + (roles.prototype.getÉvier().data.profit * profil.évier.number)
+      + (roles.prototype.getMayo().data.profit * profil.pot.number) + (roles.prototype.getGwen().data.profit * profil.gwen.number) + (roles.prototype.getFringale().data.profit * profil.fringale.number) + (roles.prototype.getRemi().data.profit * profil.remi.number) + (roles.prototype.getCéréales().data.profit * profil.cereales.number) + (roles.prototype.getÉvier().data.profit * profil.evier.number)
       + (roles.prototype.getPenis().data.profit * profil.penis.number) + (roles.prototype.getBilou().data.profit * profil.dieu.number) + (roles.prototype.getBiscuit().data.profit * profil.biscuit.number) + (roles.prototype.getCarte().data.profit * profil.carte.number)).toFixed(2))
 
     profil.cps = profit
@@ -337,9 +337,15 @@ bot.on("message", async (message) => {
         if(listeProfiles[i].name == message.member.displayName) { 
           for (let a = 0; a < upgrade.prototype.getAll(listeProfiles[i]).length; a++) {
             let goodUpgrade = upgrade.prototype.getAll(listeProfiles[i])[a]
-            if(upgrade.prototype.getAll(listeProfiles[i])[a].cond || listeProfiles[i].upgradeId.includes(goodUpgrade.id)) {
 
-              description += `${listeProfiles[i].upgradeId.includes(goodUpgrade.id) ? `✅`: `🟩`} **${goodUpgrade.name}**\nPrix: \`${numberWithCommas(goodUpgrade.data.cost)}$\`\nEffet: \`${goodUpgrade.effect}\`\nID: \`${goodUpgrade.id}\`\n`
+            if(upgrade.prototype.getAll(listeProfiles[i])[a].cond || listeProfiles[i].upgradeId.includes(goodUpgrade.id)) {
+              if(listeProfiles[i].upgradeId.includes(goodUpgrade.id)){
+                description = description
+              
+              }else{
+                description += `${listeProfiles[i].upgradeId.includes(goodUpgrade.id) ? `✅`: `🟩`} **${goodUpgrade.name}**\nPrix: \`${numberWithCommas(goodUpgrade.data.cost)}$\`\nEffet: \`${goodUpgrade.effect}\`\nID: \`${goodUpgrade.id}\`\n`
+              }
+              
             }else{
               description += `🟥 **${goodUpgrade.name}**\nPrix: \`${numberWithCommas(goodUpgrade.data.cost)}$\`\nEffet: \`${goodUpgrade.effect}\`\nID: \`${goodUpgrade.id}\`\n`
             }
@@ -398,13 +404,27 @@ bot.on("message", async (message) => {
   }
 
   else if(cmd == "buy" || cmd == "b") {
+    
+    if(args[0]){
+      args[0] = args[0].toLowerCase()
+      args[0] = args[0].normalize("NFKD").replace(/[\u0300-\u036f]/g, "")
+    }
+
+    if(args[1]){
+    args[1] = args[1].toLowerCase()
+    args[1] = args[1].normalize("NFKD").replace(/[\u0300-\u036f]/g, "")
+    }
+
+    if(args[2]){
+    args[2] = args[2].toLowerCase()
+    args[2] = args[2].normalize("NFKD").replace(/[\u0300-\u036f]/g, "")
+    }
+
     let x = 1
     let number = 1
     if(!isNaN(parseInt(args[0]))) {
       number = parseInt(args[0])
     }else {
-
-      args[0] = args[0].toLowerCase()
       if(args[0] != "max") {
         x--
       }
@@ -469,15 +489,15 @@ bot.on("message", async (message) => {
             type  = roles.prototype.getFringale()
             break;
 
-          case "rémi ":
+          case "remi ":
             type  = roles.prototype.getRemi()
             break;
 
-          case "céréales ":
+          case "cereales ":
             type  = roles.prototype.getCéréales()
             break;
 
-          case "évier pisse":
+          case "evier pisse":
             type  = roles.prototype.getÉvier()
             break;
 
@@ -604,8 +624,8 @@ bot.on("message", async (message) => {
 
         for (let a = 0; a < listeProfiles.length; a++) {
           if(listeProfiles[a].name == taggerUser.displayName) {
-            listeProfiles[i].money = intToHex(BigInt(hexToInt(listeProfiles[i].money) - BigInt(Math.round(montant))))
-            listeProfiles[a].money = intToHex(BigInt(hexToInt(listeProfiles[a].money) + BigInt(Math.round(montant))))
+            listeProfiles[i].money = intToHex(BigInt(hexToInt(listeProfiles[i].money)) - BigInt(Math.round(montant)))
+            listeProfiles[a].money = intToHex(BigInt(hexToInt(listeProfiles[a].money)) + BigInt(Math.round(montant)))
             listeProfiles[i].argentDonne += montant
 
             message.channel.send(new Discord.MessageEmbed()
