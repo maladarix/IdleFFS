@@ -2,7 +2,7 @@ class un {
 
   constructor(profil) {
     this.data = {
-      cost: 100,
+      cost: "64",
       bonus: 2,
     }
     this.type = "snigger"

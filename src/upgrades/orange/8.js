@@ -2,7 +2,7 @@ class huit {
 
   constructor(profil) {
     this.data = {
-      cost: 500000000,
+      cost: "1DCD6500",
       bonus: 5,
     }
     this.type = "orange"

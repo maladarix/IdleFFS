@@ -2,7 +2,7 @@ class trois {
 
   constructor(profil) {
     this.data = {
-      cost: 100000000,
+      cost: "5F5E100",
       bonus: 5,
     }
     this.type = "snigger"

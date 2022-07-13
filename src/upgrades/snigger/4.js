@@ -2,7 +2,7 @@ class quatre {
 
   constructor(profil) {
     this.data = {
-      cost: 10000000000000,
+      cost: "9184E72A000",
       bonus: 0.5,
     }
     this.type = "snigger"

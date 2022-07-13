@@ -2,7 +2,7 @@ class vingt {
 
     constructor(profil) {
       this.data = {
-        cost: 60000000000000000000000000000,
+        cost: "C1DED63574DE0E4660000000",
         bonus: 0.5,
       }
       this.type = "familys"

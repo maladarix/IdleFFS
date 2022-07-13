@@ -2,7 +2,7 @@ class dixhuit {
 
     constructor(profil) {
       this.data = {
-        cost: 60000000000,
+        cost: "DF8475800",
         bonus: 5,
       }
       this.type = "familys"

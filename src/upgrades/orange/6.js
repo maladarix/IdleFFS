@@ -2,7 +2,7 @@ class six {
 
   constructor(profil) {
     this.data = {
-      cost: 5000,
+      cost: "1388",
       bonus: 2,
     }
     this.type = "orange"

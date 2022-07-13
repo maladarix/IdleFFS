@@ -2,7 +2,7 @@ class deux {
 
   constructor(profil) {
     this.data = {
-      cost: 10000000,
+      cost: "989680",
       bonus: 2,
     }
     this.type = "snigger"

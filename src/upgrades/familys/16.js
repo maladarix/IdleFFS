@@ -2,7 +2,7 @@ class seize {
 
     constructor(profil) {
       this.data = {
-        cost: 1200000,
+        cost: "124F80",
         bonus: 2,
       }
       this.type = "familys"

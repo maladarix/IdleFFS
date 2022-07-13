@@ -2,7 +2,7 @@ class sept {
 
   constructor(profil) {
     this.data = {
-      cost: 5000000,
+      cost: "4C4B40",
       bonus: 2,
     }
     this.type = "orange"

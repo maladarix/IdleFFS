@@ -2,7 +2,7 @@ class cinq {
 
   constructor(profil) {
     this.data = {
-      cost: 10000000000000000000000,
+      cost: "21E19E0C9BAB2400000",
       bonus: 0.5,
     }
     this.type = "snigger"

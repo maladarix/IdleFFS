@@ -343,11 +343,11 @@ bot.on("message", async (message) => {
                 description = description
               
               }else{
-                description += `${listeProfiles[i].upgradeId.includes(goodUpgrade.id) ? `✅`: `🟩`} **${goodUpgrade.name}**\nPrix: \`${numberWithCommas(goodUpgrade.data.cost)}$\`\nEffet: \`${goodUpgrade.effect}\`\nID: \`${goodUpgrade.id}\`\n`
+                description += `${listeProfiles[i].upgradeId.includes(goodUpgrade.id) ? `✅`: `🟩`} **${goodUpgrade.name}**\nPrix: \`${approx(parseInt(hexToInt(goodUpgrade.data.cost)) , {separator: " ", min10k: true, capital: true, decimal: 1})}$\`\nEffet: \`${goodUpgrade.effect}\`\nID: \`${goodUpgrade.id}\`\n`
               }
               
             }else{
-              description += `🟥 **${goodUpgrade.name}**\nPrix: \`${numberWithCommas(goodUpgrade.data.cost)}$\`\nEffet: \`${goodUpgrade.effect}\`\nID: \`${goodUpgrade.id}\`\n`
+              description += `🟥 **${goodUpgrade.name}**\nPrix: \`${approx(parseInt(hexToInt(goodUpgrade.data.cost)) , {separator: " ", min10k: true, capital: true, decimal: 1})}$\`\nEffet: \`${goodUpgrade.effect}\`\nID: \`${goodUpgrade.id}\`\n`
             }
           }
           messageUpgrade.setDescription(description)

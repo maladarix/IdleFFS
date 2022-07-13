@@ -2,7 +2,7 @@ class neuf {
 
   constructor(profil) {
     this.data = {
-      cost: 50000000000000,
+      cost: "2D79883D2000",
       bonus: 0.5,
     }
     this.type = "orange"
