@@ -13,7 +13,7 @@ let colorRouge = "#ED4245"
 let colorVert = "#57F287"   
 let colorTurq = "#00ffdd"    
 let colorJaune = "#F1C40F"               //test                //vrai
-let infoChanOff = "990098889275244554" //828518673244618752  990098889275244554
+let infoChanOff = "828518673244618752" //828518673244618752  990098889275244554
 let liste = ["snigger", "orange", "pine", "familys", "cocomb", "douchebag", "corolla", "bagarreur", "coureur", "remparts", "pot", "gwen", "fringale", "remi", "cereales", "evier", "penis", "dieu", "biscuit", "carte"]
 let listeFarm = ["snigger ", "orange glo", "pine sol" , "familys bot", "cocomb ", "douchebag ", "corolla ", "bagarreur ", "coureur bois", "remparts ", "pot mayo", "gwen ", "fringale ", "rémi ", "céréales ", "évier pisse", "penis ", "dieu bilou", "biscuit chateau", "carte inspire"]
 let listeProfiles = []
@@ -362,10 +362,11 @@ bot.on("message", async (message) => {
               let goodUpgrade = upgrade.prototype.getAll(listeProfiles[i])[a]
               if(goodUpgrade.cond == true) {
                 if(listeProfiles[i].upgradeId.includes(goodUpgrade.id)) return message.channel.send(new Discord.MessageEmbed().setDescription("Tu as déja cet item!").setColor(colorRouge)).then(sent => deleteMsg(sent, message))
-                if(goodUpgrade.data.cost <= hexToInt(listeProfiles[i].money)) {
+
+                if(parseInt(hexToInt(goodUpgrade.data.cost)) <= parseInt(hexToInt(listeProfiles[i].money))) {
                   listeProfiles[i].upgradeId.push(goodUpgrade.id)
-                  listeProfiles[i].money = intToHex(hexToInt(listeProfiles[i].money) - goodUpgrade.data.cost)
-                  listeProfiles[i].dispense += goodUpgrade.data.cost
+                  listeProfiles[i].money = intToHex(hexToInt(listeProfiles[i].money) - hexToInt(intToHex(goodUpgrade.data.cost)))
+                  listeProfiles[i].dispense += hexToInt(goodUpgrade.data.cost)
 
                   if(listeProfiles[i].upgradeId.includes(upgrade.prototype.getAll(listeProfiles[i])[a].id)) {
                     let goodUpgrade = upgrade.prototype.getAll(listeProfiles[i])[a]
@@ -379,7 +380,7 @@ bot.on("message", async (message) => {
                   .setColor(colorVert)).then(sent => deleteMsg(sent, message))
                 }else{
                   message.channel.send(new Discord.MessageEmbed()
-                  .setDescription(`Tu n'as pas asser d'argent! **${numberWithCommas(hexToInt(listeProfiles[i].money))} / ${numberWithCommas(parseInt(goodUpgrade.data.cost))}**`)
+                  .setDescription(`Tu n'as pas asser d'argent! **${approx(parseInt(hexToInt(listeProfiles[i].money)) , {separator: " ", min10k: true, capital: true, decimal: 1})} / ${approx(parseInt(hexToInt(goodUpgrade.data.cost)) , {separator: " ", min10k: true, capital: true, decimal: 1})}**`)
                   .setColor(colorRouge)).then(sent => deleteMsg(sent, message))
                 }
               }else{
@@ -388,6 +389,7 @@ bot.on("message", async (message) => {
                 .setColor(colorRouge)).then(sent => deleteMsg(sent, message))
               }
               return
+
             }else if(a + 1 == upgrade.prototype.getAll(listeProfiles[i]).length) {
               message.channel.send(new Discord.MessageEmbed()
               .setDescription(`Article inconnu. ${prefix}upgrade (entre le ID)`)
@@ -411,13 +413,13 @@ bot.on("message", async (message) => {
     }
 
     if(args[1]){
-    args[1] = args[1].toLowerCase()
-    args[1] = args[1].normalize("NFKD").replace(/[\u0300-\u036f]/g, "")
+      args[1] = args[1].toLowerCase()
+      args[1] = args[1].normalize("NFKD").replace(/[\u0300-\u036f]/g, "")
     }
 
     if(args[2]){
-    args[2] = args[2].toLowerCase()
-    args[2] = args[2].normalize("NFKD").replace(/[\u0300-\u036f]/g, "")
+      args[2] = args[2].toLowerCase()
+      args[2] = args[2].normalize("NFKD").replace(/[\u0300-\u036f]/g, "")
     }
 
     let x = 1
@@ -442,15 +444,25 @@ bot.on("message", async (message) => {
             break;
           
           case "orange glo":
+          case "orange ":
+          case "glo ":
             type  = roles.prototype.getOrange()
+            args[x] = "orange"
             break;
           
           case "pine sol":
+          case "pine ":
+          case "sol ":
             type  = roles.prototype.getPine()
+            args[x] = "pine"
             break;
 
           case "familys bot":
+          case "familys ":
+          case "family ":
+          case "bot ":
             type  = roles.prototype.getFamily()
+            args[x] = "familys"
             break;
 
           case "cocomb ":
@@ -470,7 +482,10 @@ bot.on("message", async (message) => {
             break;
             
           case "coureur bois":
+          case "coureur ":
+          case "bois ":
             type  = roles.prototype.getCoureur()
+            args[x] = "coureur"
             break;
           
           case "remparts ":
@@ -478,7 +493,10 @@ bot.on("message", async (message) => {
             break;
 
           case "pot mayo":
+          case "pot ":
+          case "mayo ":
             type  = roles.prototype.getMayo()
+            args[x] = "pot"
             break;
 
           case "gwen ":
@@ -498,7 +516,10 @@ bot.on("message", async (message) => {
             break;
 
           case "evier pisse":
+          case "evier ":
+          case "pisse ":
             type  = roles.prototype.getÉvier()
+            args[x] = "evier"
             break;
 
           case "penis ":
@@ -506,20 +527,30 @@ bot.on("message", async (message) => {
             break;
 
           case "dieu bilou":
+          case "dieu ":
+          case "bilou ":
             type  = roles.prototype.getBilou()
+            args[x] = "dieu"
             break;
 
           case "biscuit chateau":
+          case "biscuit ":
+          case "chateau ":
             type  = roles.prototype.getBiscuit()
+            args[x] = "biscuit"
             break;
 
           case "carte inspire":
+          case "carte ":
+          case "inspire ":
             type  = roles.prototype.getCarte()
+            args[x] = "carte"
             break;
         }
         if(type == undefined) return message.channel.send(new Discord.MessageEmbed()
         .setDescription(`Article inconnu. ${prefix}shop`)
         .setColor(colorRouge)).then((sent) => {deleteMsg(sent, message)})
+        
         let bonus = 1
         for (let a = 0; a < upgrade.prototype.getAll(listeProfiles[i]).length; a++) {
           if(listeProfiles[i].upgradeId == undefined) break
@@ -544,6 +575,10 @@ bot.on("message", async (message) => {
 
           }while (Math.round(coutTotal) <= parseInt(hexToInt(listeProfiles[i].money)))
         }
+
+        console.log(args[x])
+        console.log(listeProfiles[i][args[x]])
+
 
         let cost = Math.round(((prix * (1.15 ** (listeProfiles[i][args[x]].number + parseInt(number)) - 1.15 ** listeProfiles[i][args[x]].number)) / 0.15) * bonus)
         
