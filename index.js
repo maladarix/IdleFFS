@@ -13,7 +13,7 @@ let colorRouge = "#ED4245"
 let colorVert = "#57F287"   
 let colorTurq = "#00ffdd"    
 let colorJaune = "#F1C40F"               //test                //vrai
-let infoChanOff = "828518673244618752" //828518673244618752  990098889275244554
+let infoChanOff = "990098889275244554" //828518673244618752  990098889275244554
 let liste = ["snigger", "orange", "pine", "familys", "cocomb", "douchebag", "corolla", "bagarreur", "coureur", "remparts", "pot", "gwen", "fringale", "remi", "cereales", "evier", "penis", "dieu", "biscuit", "carte"]
 let listeFarm = ["snigger ", "orange glo", "pine sol" , "familys bot", "cocomb ", "douchebag ", "corolla ", "bagarreur ", "coureur bois", "remparts ", "pot mayo", "gwen ", "fringale ", "rémi ", "céréales ", "évier pisse", "penis ", "dieu bilou", "biscuit chateau", "carte inspire"]
 let listeProfiles = []
@@ -550,7 +550,7 @@ bot.on("message", async (message) => {
         if(type == undefined) return message.channel.send(new Discord.MessageEmbed()
         .setDescription(`Article inconnu. ${prefix}shop`)
         .setColor(colorRouge)).then((sent) => {deleteMsg(sent, message)})
-        
+
         let bonus = 1
         for (let a = 0; a < upgrade.prototype.getAll(listeProfiles[i]).length; a++) {
           if(listeProfiles[i].upgradeId == undefined) break
