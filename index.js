@@ -366,7 +366,7 @@ bot.on("message", async (message) => {
                 if(parseInt(hexToInt(goodUpgrade.data.cost)) <= parseInt(hexToInt(listeProfiles[i].money))) {
                   listeProfiles[i].upgradeId.push(goodUpgrade.id)
                   listeProfiles[i].money = intToHex(hexToInt(listeProfiles[i].money) - hexToInt(intToHex(goodUpgrade.data.cost)))
-                  listeProfiles[i].dispense += hexToInt(goodUpgrade.data.cost)
+                  listeProfiles[i].dispense = (parseInt(listeProfiles[i].dispense) + parseInt(hexToInt(goodUpgrade.data.cost)))
 
                   if(listeProfiles[i].upgradeId.includes(upgrade.prototype.getAll(listeProfiles[i])[a].id)) {
                     let goodUpgrade = upgrade.prototype.getAll(listeProfiles[i])[a]

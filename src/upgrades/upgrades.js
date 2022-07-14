@@ -18,13 +18,19 @@ const dixsept = require('./familys/17')
 const dixhuit = require('./familys/18')
 const dixneuf = require('./familys/19')
 const vingt = require('./familys/20')
+const vingtetun = require('./cocomb/21')
+const vingtdeux = require('./cocomb/22')
+const vingttrois = require('./cocomb/23')
+const vingtquatre = require('./cocomb/24')
+const vingtcinq = require('./cocomb/25')
 
 class upgrade{
 
   getAll(profil){
     return [this.getUn(profil), this.getDeux(profil), this.getTrois(profil), this.getQuatre(profil), this.getCinq(profil), this.getSix(profil), this.getSept(profil), this.getHuit(profil),
     this.getNeuf(profil), this.getDix(profil), this.getOnze(profil), this.getDouze(profil), this.getTreize(profil), this.getQuatorze(profil), this.getQuinze(profil), this.getSeize(profil), 
-    this.getDixsept(profil), this.getDixhuit(profil), this.getDixneuf(profil), this.getVingt(profil)]
+    this.getDixsept(profil), this.getDixhuit(profil), this.getDixneuf(profil), this.getVingt(profil), this.getVingtetun(profil), this.getVingtdeux(profil), this.getVingttrois(profil), 
+    this.getVingtquatre(profil), this.getVingtcinq(profil)]
   }
 
   getUn(profil){
@@ -105,6 +111,26 @@ class upgrade{
 
   getVingt(profil){
     return new vingt(profil)
+  }
+
+  getVingtetun(profil){
+    return new vingtetun(profil)
+  }
+
+  getVingtdeux(profil){
+    return new vingtdeux(profil)
+  }
+
+  getVingttrois(profil){
+    return new vingttrois(profil)
+  }
+
+  getVingtquatre(profil){
+    return new vingtquatre(profil)
+  }
+
+  getVingtcinq(profil){
+    return new vingtcinq(profil)
   }
 }
 
