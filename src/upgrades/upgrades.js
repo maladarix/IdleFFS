@@ -28,6 +28,12 @@ const vingtsept = require('./douchebag/27')
 const vingthuit = require('./douchebag/28')
 const vingtneuf = require('./douchebag/29')
 const trente = require('./douchebag/30')
+const trenteetun = require('./corolla/31')
+const trentedeux = require('./corolla/32')
+const trentetrois = require('./corolla/33')
+const trentequatre = require('./corolla/34')
+const trentecinq = require('./corolla/35')
+
 
 class upgrade{
 
@@ -35,7 +41,8 @@ class upgrade{
     return [this.getUn(profil), this.getDeux(profil), this.getTrois(profil), this.getQuatre(profil), this.getCinq(profil), this.getSix(profil), this.getSept(profil), this.getHuit(profil),
     this.getNeuf(profil), this.getDix(profil), this.getOnze(profil), this.getDouze(profil), this.getTreize(profil), this.getQuatorze(profil), this.getQuinze(profil), this.getSeize(profil), 
     this.getDixsept(profil), this.getDixhuit(profil), this.getDixneuf(profil), this.getVingt(profil), this.getVingtetun(profil), this.getVingtdeux(profil), this.getVingttrois(profil), 
-    this.getVingtquatre(profil), this.getVingtcinq(profil), this.getVingtsix(profil), this.getVingtsept(profil), this.getVingthuit(profil), this.getVingtneuf(profil), this.getTrente(profil)]
+    this.getVingtquatre(profil), this.getVingtcinq(profil), this.getVingtsix(profil), this.getVingtsept(profil), this.getVingthuit(profil), this.getVingtneuf(profil), this.getTrente(profil),
+    this.getTrenteetun(profil), this.getTrentedeux(profil), this.getTrentetrois(profil), this.getTrentequatre(profil), this.getTrentecinq(profil)]
   }
 
   getUn(profil){
@@ -157,6 +164,27 @@ class upgrade{
   getTrente(profil){
     return new trente(profil)
   }
+
+  getTrenteetun(profil){
+    return new trenteetun(profil)
+  }
+
+  getTrentedeux(profil){
+    return new trentedeux(profil)
+  }
+
+  getTrentetrois(profil){
+    return new trentetrois(profil)
+  }
+
+  getTrentequatre(profil){
+    return new trentequatre(profil)
+  }
+
+  getTrentecinq(profil){
+    return new trentecinq(profil)
+  }
+
 }
 
 module.exports = upgrade
