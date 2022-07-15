@@ -75,7 +75,7 @@ function msgProfil(profil, prof) {
   .setTitle(`Profil de ${prof.displayName}\n**${profil.online ? "En ligne 🟢" : "Hors ligne 🔴"}**  ||  Prestige ${numberWithCommas(profil.prestige)} 💎` )
   .setThumbnail(prof.user.avatarURL())
   .addField("Argent 💰", `${approx(parseInt(hexToInt(profil.money)), {separator: " ", min10k: true, capital: true, decimal: 2})} $`, false)
-  .addField("Revenus 💸", `${approx((profil.cps * (profil.online ? 1 : 0.05)), {separator: " ", min10k: true, capital: true, decimal: profil.cps > 10000 ? 0 : 2})} $ / sec\n (${approx((profil.cps * (gainPrestige ** profil.prestige)) * (profil.online ? 1 : 0.05) , {separator: " ", min10k: true, capital: true, decimal: profil.cps > 10000 ? 0 : 2})} $) (+${((gainPrestige ** profil.prestige * 100) - 100).toFixed(0)}%💎)`, false)
+  .addField("Revenus 💸", `${approx((profil.cps * (profil.online ? 1 : 0.05)), {separator: " ", min10k: true, capital: true, decimal: 2})} $ / sec\n (${approx((profil.cps * (gainPrestige ** profil.prestige)) * (profil.online ? 1 : 0.05) , {separator: " ", min10k: true, capital: true, decimal: profil.cps > 10000 ? 0 : 2})} $) (+${((gainPrestige ** profil.prestige * 100) - 100).toFixed(0)}%💎)`, false)
   .addField("Argent dépensé 📉", `${approx(profil.dispense, {separator: " ", min10k: true, capital: true, decimal: 2})} $`, false)
   .setColor(colorTurq)
 
