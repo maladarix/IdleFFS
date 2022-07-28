@@ -13,7 +13,7 @@ let colorRouge = "#ED4245"
 let colorVert = "#57F287"   
 let colorTurq = "#00ffdd"    
 let colorJaune = "#F1C40F"               //test                //vrai
-let infoChanOff = "828518673244618752" //828518673244618752  990098889275244554
+let infoChanOff = "990098889275244554" //990098889275244554  990098889275244554
 let liste = ["snigger", "orange", "pine", "familys", "cocomb", "douchebag", "corolla", "bagarreur", "coureur", "remparts", "pot", "gwen", "fringale", "remi", "cereales", "evier", "penis", "dieu", "biscuit", "carte"]
 let listeFarm = ["snigger ", "orange glo", "pine sol" , "familys bot", "cocomb ", "douchebag ", "corolla ", "bagarreur ", "coureur bois", "remparts ", "pot mayo", "gwen ", "fringale ", "rémi ", "céréales ", "évier pisse", "penis ", "dieu bilou", "biscuit chateau", "carte inspire"]
 let listeProfiles = []
@@ -314,7 +314,6 @@ bot.on("message", async (message) => {
         if(numPrestige == 0) return message.channel.send(new Discord.MessageEmbed()
         .setDescription(`Tu n'as pas asser d'argent! **${approx(hexToInt(listeProfiles[i].money) , {separator: " ", min10k: true, capital: true, decimal: 2})}$ / ${approx(Math.round((basePrestige * (augPrestige ** (listeProfiles[i].prestige + 1) - augPrestige ** listeProfiles[i].prestige)) / (augPrestige - 1)) , {separator: " ", min10k: true, capital: true, decimal: 2})}$**`)
         .setColor(colorRouge))
-        console.log(approx(hexToInt(intToHex(prixPres))))
         message.channel.send(new Discord.MessageEmbed()
         .setDescription(`**Prestige || ${listeProfiles[i].name}**\n\nChaque fois que tu prestige, tu gagnes 2% plus de profits par prestige.\n\n**Ce que tu perds après avoir prestige:**\n-Tout ton argent\n-Tes fermes\n\n**Coût**:\n${approx(hexToInt(intToHex(prixPres)), {separator: " ", min10k: true, capital: true, decimal: 2})}$\n\n+ ${numberWithCommas(numPrestige)} 💎`)
         .setFooter(`Clique sur le ✅ pour passer au prestige ${listeProfiles[i].prestige + numPrestige} 💎`)
