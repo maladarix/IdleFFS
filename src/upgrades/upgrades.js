@@ -33,6 +33,16 @@ const trentedeux = require('./corolla/32')
 const trentetrois = require('./corolla/33')
 const trentequatre = require('./corolla/34')
 const trentecinq = require('./corolla/35')
+const trentetsix = require('./bagarreur/36')
+const trentetsept = require('./bagarreur/37')
+const trentethuit = require('./bagarreur/38')
+const trentetneuf = require('./bagarreur/39')
+const quarante = require('./bagarreur/40')
+const quaranteetun = require('./coureur/41')
+const quarantedeux = require('./coureur/42')
+const quarantetrois = require('./coureur/43')
+const quarantequatre = require('./coureur/44')
+const quarantecinq = require('./coureur/45')
 
 
 class upgrade{
@@ -42,7 +52,9 @@ class upgrade{
     this.getNeuf(profil), this.getDix(profil), this.getOnze(profil), this.getDouze(profil), this.getTreize(profil), this.getQuatorze(profil), this.getQuinze(profil), this.getSeize(profil), 
     this.getDixsept(profil), this.getDixhuit(profil), this.getDixneuf(profil), this.getVingt(profil), this.getVingtetun(profil), this.getVingtdeux(profil), this.getVingttrois(profil), 
     this.getVingtquatre(profil), this.getVingtcinq(profil), this.getVingtsix(profil), this.getVingtsept(profil), this.getVingthuit(profil), this.getVingtneuf(profil), this.getTrente(profil),
-    this.getTrenteetun(profil), this.getTrentedeux(profil), this.getTrentetrois(profil), this.getTrentequatre(profil), this.getTrentecinq(profil)]
+    this.getTrenteetun(profil), this.getTrentedeux(profil), this.getTrentetrois(profil), this.getTrentequatre(profil), this.getTrentecinq(profil), this.getTrentesix(profil), this.getTrentesept(profil),
+    this.getTrentehuit(profil), this.getTrenteneuf(profil), this.getQuarante(profil), this.getQuaranteetun(profil), this.getQuarantedeux(profil), this.getQuarantetrois(profil), this.getQuarantequatre(profil),
+    this.getQuarantecinq(profil)]
   }
 
   getUn(profil){
@@ -183,6 +195,46 @@ class upgrade{
 
   getTrentecinq(profil){
     return new trentecinq(profil)
+  }
+
+  getTrentesix(profil){
+    return new trentetsix(profil)
+  }
+
+  getTrentesept(profil){
+    return new trentetsept(profil)
+  }
+
+  getTrentehuit(profil){
+    return new trentethuit(profil)
+  }
+
+  getTrenteneuf(profil){
+    return new trentetneuf(profil)
+  }
+
+  getQuarante(profil){
+    return new quarante(profil)
+  }
+
+  getQuaranteetun(profil){
+    return new quaranteetun(profil)
+  }
+
+  getQuarantedeux(profil){
+    return new quarantedeux(profil)
+  }
+
+  getQuarantetrois(profil){
+    return new quarantetrois(profil)
+  }
+
+  getQuarantequatre(profil){
+    return new quarantequatre(profil)
+  }
+
+  getQuarantecinq(profil){
+    return new quarantecinq(profil)
   }
 
 }

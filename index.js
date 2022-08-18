@@ -13,7 +13,7 @@ let colorRouge = "#ED4245"
 let colorVert = "#57F287"   
 let colorTurq = "#00ffdd"    
 let colorJaune = "#F1C40F"               //test                //vrai
-let infoChanOff = "990098889275244554" //990098889275244554  990098889275244554
+let infoChanOff = "990098889275244554" //828518673244618752  990098889275244554
 let liste = ["snigger", "orange", "pine", "familys", "cocomb", "douchebag", "corolla", "bagarreur", "coureur", "remparts", "pot", "gwen", "fringale", "remi", "cereales", "evier", "penis", "dieu", "biscuit", "carte"]
 let listeFarm = ["snigger ", "orange glo", "pine sol" , "familys bot", "cocomb ", "douchebag ", "corolla ", "bagarreur ", "coureur bois", "remparts ", "pot mayo", "gwen ", "fringale ", "rémi ", "céréales ", "évier pisse", "penis ", "dieu bilou", "biscuit chateau", "carte inspire"]
 let listeProfiles = []
@@ -75,7 +75,7 @@ function msgProfil(profil, prof) {
   .setTitle(`Profil de ${prof.displayName}\n**${profil.online ? "En ligne 🟢" : "Hors ligne 🔴"}**  ||  Prestige ${numberWithCommas(profil.prestige)} 💎` )
   .setThumbnail(prof.user.avatarURL())
   .addField("Argent 💰", `${approx(parseInt(hexToInt(profil.money)), {separator: " ", min10k: true, capital: true, decimal: 2})} $`, false)
-  .addField("Revenus 💸", `${approx((profil.cps * (profil.online ? 1 : 0.05)), {separator: " ", min10k: true, capital: true, decimal: 2})} $ / sec\n (${approx((profil.cps * (gainPrestige ** profil.prestige)) * (profil.online ? 1 : 0.05) , {separator: " ", min10k: true, capital: true, decimal: profil.cps > 10000 ? 0 : 2})} $) (+${((gainPrestige ** profil.prestige * 100) - 100).toFixed(0)}%💎)`, false)
+  .addField("Revenus 💸", `${approx((profil.cps * (profil.online ? 1 : 0.05)), {separator: " ", min10k: true, capital: true, decimal: 2})} $ / sec\n (${approx((profil.cps * (gainPrestige ** profil.prestige)) * (profil.online ? 1 : 0.05) , {separator: " ", min10k: true, capital: true, decimal: profil.cps > 10000 ? 0 : 2})} $) (+${approx(((gainPrestige ** profil.prestige * 100) - 100) , {separator: " ", min10k: true, capital: true, decimal: profil.cps > 10000 ? 0 : 2})}%💎)`, false)
   .addField("Argent dépensé 📉", `${approx(profil.dispense, {separator: " ", min10k: true, capital: true, decimal: 2})} $`, false)
   .setColor(colorTurq)
 
