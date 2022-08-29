@@ -2,7 +2,7 @@ class bilou {
   
   constructor() {
     this.data = {
-      profit: 8300000000000,
+      profit: 15000000000000,
       cost: "39992648A23C8A00000",
     }
     this.name = "👼 Dieu Bilou"

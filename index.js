@@ -346,7 +346,10 @@ bot.on("message", async (message) => {
               }
               
             }else{
-              description += `🟥 **${goodUpgrade.name}**\nPrix: \`${approx(parseInt(hexToInt(goodUpgrade.data.cost)) , {separator: " ", min10k: true, capital: true, decimal: 1})}$\`\nEffet: \`${goodUpgrade.effect}\`\nID: \`${goodUpgrade.id}\`\n`
+
+              if((!description.toLowerCase().includes(goodUpgrade.type)) && (goodUpgrade.type == "familys" ? !description.toLowerCase().includes("family's") : true) && (goodUpgrade.type == "pot" ? !description.toLowerCase().includes("mayo") : true)) {
+                description += `🟥 **${goodUpgrade.name}**\nPrix: \`${approx(parseInt(hexToInt(goodUpgrade.data.cost)) , {separator: " ", min10k: true, capital: true, decimal: 1})}$\`\nEffet: \`${goodUpgrade.effect}\`\nID: \`${goodUpgrade.id}\`\n`
+              }
             }
           }
           messageUpgrade.setDescription(description)
