@@ -154,20 +154,20 @@ setInterval(() => {
       }
     }
 
-    for (let a = 0; a < upgrade.prototype.getAll(profil).length; a++) {
-      if(profil.upgradeId == undefined) break
-      if(profil.upgradeId.includes(upgrade.prototype.getAll(profil)[a].id)) {
-        let goodUpgrade = upgrade.prototype.getAll(profil)[a]
-        if(goodUpgrade.bonusType == "cps") {
-          profil[goodUpgrade.type].multi *= goodUpgrade.data.bonus
+    for (let i = 0; i < upgrade.prototype.getAll(profil).length; i++) {
+      let up = upgrade.prototype.getAll(profil)[i]
+      if(up.bonusType == "cps") {
+        if(profil.upgradeId == undefined) break
+        if(profil.upgradeId.includes(up.id)) {
+          profil[up.type].multi = up.data.bonus * profil[up.type].multi
         }
       }
     }
 
-    let profit = parseFloat((((roles.prototype.getSnigger().data.profit * profil.snigger.multi) * profil.snigger.number) + (roles.prototype.getOrange().data.profit * profil.orange.number) + (roles.prototype.getPine().data.profit * profil.pine.number) + (roles.prototype.getFamily().data.profit * profil.familys.number) + (roles.prototype.getCocomb().data.profit * profil.cocomb.number)
-      + (roles.prototype.getDouchebag().data.profit * profil.douchebag.number) + (roles.prototype.getCorolla().data.profit * profil.corolla.number) + (roles.prototype.getBagarreur().data.profit * profil.bagarreur.number) + (roles.prototype.getCoureur().data.profit * profil.coureur.number) + (roles.prototype.getRemparts().data.profit * profil.remparts.number)
-      + (roles.prototype.getMayo().data.profit * profil.pot.number) + (roles.prototype.getGwen().data.profit * profil.gwen.number) + (roles.prototype.getFringale().data.profit * profil.fringale.number) + (roles.prototype.getRemi().data.profit * profil.remi.number) + (roles.prototype.getCéréales().data.profit * profil.cereales.number) + (roles.prototype.getÉvier().data.profit * profil.evier.number)
-      + (roles.prototype.getPenis().data.profit * profil.penis.number) + (roles.prototype.getBilou().data.profit * profil.dieu.number) + (roles.prototype.getBiscuit().data.profit * profil.biscuit.number) + (roles.prototype.getCarte().data.profit * profil.carte.number)).toFixed(2))
+    let profit = parseFloat((((roles.prototype.getSnigger().data.profit * profil.snigger.multi) * profil.snigger.number) + ((roles.prototype.getOrange().data.profit * profil.orange.multi) * profil.orange.number) + ((roles.prototype.getPine().data.profit * profil.pine.multi) * profil.pine.number) + ((roles.prototype.getFamily().data.profit * profil.familys.multi) * profil.familys.number) + ((roles.prototype.getCocomb().data.profit * profil.cocomb.multi) * profil.cocomb.number)
+      + ((roles.prototype.getDouchebag().data.profit * profil.douchebag.multi) * profil.douchebag.number) + ((roles.prototype.getCorolla().data.profit * profil.corolla.multi) * profil.corolla.number) + ((roles.prototype.getBagarreur().data.profit * profil.bagarreur.multi) * profil.bagarreur.number) + ((roles.prototype.getCoureur().data.profit * profil.coureur.multi) * profil.coureur.number) + ((roles.prototype.getRemparts().data.profit * profil.remparts.multi) * profil.remparts.number)
+      + ((roles.prototype.getMayo().data.profit * profil.pot.multi) * profil.pot.number) + ((roles.prototype.getGwen().data.profit * profil.gwen.multi) * profil.gwen.number) + ((roles.prototype.getFringale().data.profit * profil.fringale.multi) * profil.fringale.number) + ((roles.prototype.getRemi().data.profit * profil.remi.multi) * profil.remi.number) + ((roles.prototype.getCéréales().data.profit * profil.cereales.multi) * profil.cereales.number) + ((roles.prototype.getÉvier().data.profit * profil.evier.multi) * profil.evier.number)
+      + ((roles.prototype.getPenis().data.profit * profil.penis.multi) * profil.penis.number) + ((roles.prototype.getBilou().data.profit * profil.dieu.multi) * profil.dieu.number) + ((roles.prototype.getBiscuit().data.profit * profil.biscuit.multi) * profil.biscuit.number) + ((roles.prototype.getCarte().data.profit * profil.carte.multi) * profil.carte.number)).toFixed(2))
 
     profil.cps = profit
     profil.timeOut == 0 ? profil.timeOut = 0 : profil.timeOut --
@@ -206,6 +206,7 @@ setInterval(() => {
     }
     fs.writeFileSync('./src/data.json', JSON.stringify(listeProfiles), "utf8" , function(err) {
       if(err) throw err;})
+    //console.log(listeProfiles)
   });
 
   fs.writeFileSync('./src/data2.json', JSON.stringify(listeProfiles), "utf8" , function(err) {

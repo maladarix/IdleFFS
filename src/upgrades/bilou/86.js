@@ -1,6 +1,6 @@
 class quatrevingsix  {
 
-  constructor(profil) {les
+  constructor(profil) {
     this.data = {
       cost: "FE1C215E8F838E000000",
       bonus: 2,
