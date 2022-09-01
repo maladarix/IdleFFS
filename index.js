@@ -13,7 +13,7 @@ let colorRouge = "#ED4245"
 let colorVert = "#57F287"   
 let colorTurq = "#00ffdd"    
 let colorJaune = "#F1C40F"               //test                //vrai
-let infoChanOff = "990098889275244554" //828518673244618752  990098889275244554
+let infoChanOff = "828518673244618752" //828518673244618752  990098889275244554
 let liste = ["snigger", "orange", "pine", "familys", "cocomb", "douchebag", "corolla", "bagarreur", "coureur", "remparts", "pot", "gwen", "fringale", "remi", "cereales", "evier", "penis", "dieu", "biscuit", "carte"]
 let listeFarm = ["snigger ", "orange glo", "pine sol" , "familys bot", "cocomb ", "douchebag ", "corolla ", "bagarreur ", "coureur bois", "remparts ", "pot mayo", "gwen ", "fringale ", "rémi ", "céréales ", "évier pisse", "penis ", "dieu bilou", "biscuit chateau", "carte inspire"]
 let listeProfiles = []
@@ -75,7 +75,7 @@ function msgProfil(profil, prof) {
   .setTitle(`Profil de ${prof.displayName}\n**${profil.online ? "En ligne 🟢" : "Hors ligne 🔴"}**  ||  Prestige ${numberWithCommas(profil.prestige)} 💎` )
   .setThumbnail(prof.user.avatarURL())
   .addField("Argent 💰", `${approx(parseInt(hexToInt(profil.money)), {separator: " ", min10k: true, capital: true, decimal: 2})} $`, false)
-  .addField("Revenus 💸", `${approx((profil.cps * (profil.online ? 1 : 0.05)), {separator: " ", min10k: true, capital: true, decimal: 2})} $ / sec\n (${approx((profil.cps * (gainPrestige ** profil.prestige)) * (profil.online ? 1 : 0.05) , {separator: " ", min10k: true, capital: true, decimal: profil.cps > 10000 ? 0 : 2})} $) (+${approx(((gainPrestige ** profil.prestige * 100) - 100) , {separator: " ", min10k: true, capital: true, decimal: profil.cps > 10000 ? 0 : 2})}%💎)`, false)
+  .addField("Revenus 💸", `${approx((profil.cps * (profil.online ? 1 : 0.05)), {separator: " ", min10k: true, capital: true, decimal: 2})} $ / sec\n (${approx((profil.cps * (gainPrestige ** profil.prestige)) * (profil.online ? 1 : 0.05) , {separator: " ", min10k: true, capital: true, decimal: 2})} $) (+${approx(((gainPrestige ** profil.prestige * 100) - 100) , {separator: " ", min10k: true, capital: true, decimal: profil.cps > 10000 ? 0 : 2})}%💎)`, false)
   .addField("Argent dépensé 📉", `${approx(profil.dispense, {separator: " ", min10k: true, capital: true, decimal: 2})} $`, false)
   .setColor(colorTurq)
 
@@ -92,11 +92,11 @@ function msgProfil(profil, prof) {
           }
         }
       }
-      embedprofil.addField(roles.prototype.getAll(profil)[a].name, "Prix: " +`\`${approx(hexToInt(Math.round(((hexToInt(profil[liste[a]].data.cost) * (1.15 ** (profil[liste[a]].number + 1) - 1.15 ** profil[liste[a]].number)) / 0.15) * (bonus > 0 ? bonus : 1 ))) , {separator: " ", min10k: true, capital: true, decimal: 0} )} $${bonus > 0 ? ` (${bonus * 100} %)` : ""}\`\n` + "Revenus: " + `\`+${numberWithCommas(profil[liste[a]].data.profit)}/sec\`\n` + "Tu possède: " + `\`${numberWithCommas(profil[liste[a]].number)}\`\n` + `Cps: \`+${numberWithCommas((profil[liste[a]].number * profil[liste[a]].data.profit).toFixed(1))}${profil[liste[a]].multi > 1 ? ` (x${profil[liste[a]].multi})` : ""}\`` )
+      embedprofil.addField(roles.prototype.getAll(profil)[a].name, "Prix: " +`\`${approx(hexToInt(Math.round(((hexToInt(profil[liste[a]].data.cost) * (1.15 ** (profil[liste[a]].number + 1) - 1.15 ** profil[liste[a]].number)) / 0.15) * (bonus > 0 ? bonus : 1 ))) , {separator: " ", min10k: true, capital: true, decimal: 2} )} $${bonus > 0 ? ` (${bonus * 100} %)` : ""}\`\n` + "Revenus: " + `\`+${approx(profil[liste[a]].data.profit, {separator: " ", min10k: true, capital: true, decimal: 2})}/sec\`\n` + "Tu possède: " + `\`${numberWithCommas(profil[liste[a]].number)}\`\n` + `Cps: \`+${approx((profil[liste[a]].number * profil[liste[a]].data.profit).toFixed(1), {separator: " ", min10k: true, capital: true, decimal: 2})}${profil[liste[a]].multi > 1 ? ` (x${profil[liste[a]].multi})` : ""}\`` )
     }
     if(profil[liste[a]].number > 0 && profil[liste[a + 1]] != undefined) {
       if(profil[liste[a]].number > 0 && profil[liste[a + 1]].number == 0) {
-        embedprofil.addField("===Prochain objet===", `**${roles.prototype.getAll()[a + 1].name}**\nPrix: \`${approx(hexToInt(profil[liste[a + 1]].data.cost), {separator: " ", min10k: true, capital: true, decimal: profil.cps > 10000 ? 0 : 2})}$\`\n Cps: \`+${numberWithCommas(profil[liste[a + 1]].data.profit)}\``)
+        embedprofil.addField("===Prochain objet===", `**${roles.prototype.getAll()[a + 1].name}**\nPrix: \`${approx(hexToInt(profil[liste[a + 1]].data.cost), {separator: " ", min10k: true, capital: true, decimal: 2})}$\`\n Cps: \`+${numberWithCommas(profil[liste[a + 1]].data.profit)}\``)
       }
     }
   }
@@ -202,7 +202,7 @@ setInterval(() => {
       variables[0].messagePrestige.push(profil.id)
       fs.writeFileSync('./src/variable.json', JSON.stringify(variables), "utf8" , function(err) {
         if(err) throw err;})
-      bot.channels.cache.get(infoChanOff).send(`<@${profil.id}>, tu peut maintenant ${prefix}prestige pour **${numberWithCommas(parseFloat(Math.round((basePrestige * (augPrestige ** (profil.prestige + 1) - augPrestige ** profil.prestige)) / (augPrestige - 1))))}$** ou attendre!`)
+      bot.channels.cache.get(infoChanOff).send(`<@${profil.id}>, tu peut maintenant ${prefix}prestige pour **${approx(parseFloat(Math.round((basePrestige * (augPrestige ** (profil.prestige + 1) - augPrestige ** profil.prestige)) / (augPrestige - 1))), {separator: " ", min10k: true, capital: true, decimal: 2})}$** ou attendre!`)
     }
     fs.writeFileSync('./src/data.json', JSON.stringify(listeProfiles), "utf8" , function(err) {
       if(err) throw err;})
@@ -816,7 +816,7 @@ bot.on("message", async (message) => {
     let type = roles.prototype.getAll()
     for (let i = 0; i < listeFarm.length; i++) {
 
-      messageShop += `**${type[i].name.split(" ")[0]} ${listeFarm[i]}**\nPrix: \`${numberWithCommas(hexToInt(type[i].data.cost))}$\`\nRevenus:\`+${numberWithCommas(type[i].data.profit)}/sec\`\n\n`
+      messageShop += `**${type[i].name.split(" ")[0]} ${listeFarm[i]}**\nPrix: \`${approx(hexToInt(type[i].data.cost), {separator: " ", min10k: true, capital: true, decimal: 0})}$\`\nRevenus:\`+${approx(type[i].data.profit, {separator: " ", min10k: true, capital: true, decimal: 2})}/sec\`\n\n`
     }
     message.channel.send(new Discord.MessageEmbed()
     .setTitle("Liste des articles du shop")
