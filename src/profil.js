@@ -12,6 +12,7 @@ class Profil {
     this.totalmoney = 15
     this.cps = 0
     this.argentDonne = 0
+    this.moneyInvest = "0"
     this.prestige = prestige
     this.upgradeId = upId
     this.achievements = achievements

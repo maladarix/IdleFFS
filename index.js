@@ -5,6 +5,9 @@ const Profil = require('./src/profil')
 const roles = require('./src/farm/farm')
 const upgrade = require('./src/upgrades/upgrades')
 const progressbar = require('string-progressbar');
+const ChartJsImage = require('chartjs-to-image');
+const axios = require('axios').default
+
 var approx = require('approximate-number');
 require("dotenv").config()
 
@@ -18,6 +21,8 @@ let liste = ["snigger", "orange", "pine", "familys", "cocomb", "douchebag", "cor
 let listeFarm = ["snigger ", "orange glo", "pine sol" , "familys bot", "cocomb ", "douchebag ", "corolla ", "bagarreur ", "coureur bois", "remparts ", "pot mayo", "gwen ", "fringale ", "rémi ", "céréales ", "évier pisse", "penis ", "dieu bilou", "biscuit chateau", "carte inspire"]
 let listeProfiles = []
 let lastProfilMsg = null
+let lastChartMsg = null
+let lastChart = null
 let lastProfil = null
 let reactionPrestige = null
 let go = 0
@@ -96,11 +101,104 @@ function msgProfil(profil, prof) {
     }
     if(profil[liste[a]].number > 0 && profil[liste[a + 1]] != undefined) {
       if(profil[liste[a]].number > 0 && profil[liste[a + 1]].number == 0) {
-        embedprofil.addField("===Prochain objet===", `**${roles.prototype.getAll()[a + 1].name}**\nPrix: \`${approx(hexToInt(profil[liste[a + 1]].data.cost), {separator: " ", min10k: true, capital: true, decimal: 2})}$\`\n Cps: \`+${numberWithCommas(profil[liste[a + 1]].data.profit)}\``)
+        embedprofil.addField("===Prochain objet===", `**${roles.prototype.getAll()[a + 1].name}**\nPrix: \`${approx(hexToInt(profil[liste[a + 1]].data.cost), {separator: " ", min10k: true, capital: true, decimal: 2})}$\`\n Cps: \`+${approx(profil[liste[a + 1]].data.profit, {separator: " ", min10k: true, capital: true, decimal: 2})}\``)
       }
     }
   }
   return embedprofil
+}
+
+function msgChart(inst, time, numb, channel) {
+  let embedChart = new Discord.MessageEmbed()
+  let instrument = null
+    axios.get("https://api.crypto.com/v2/public/get-instruments").then(async function (response) {
+      response.data.result.instruments.forEach(curr => {
+        if(curr.base_currency == inst.toLocaleUpperCase()) {
+          if(curr.quote_currency == 'USDT') {
+            instrument = curr.instrument_name
+          }
+        }
+      });
+      axios.get(`https://api.crypto.com/v2/public/get-candlestick?instrument_name=${instrument}&timeframe=${time}`).then(async function (response) {
+        let data = null
+        data = response.data.result.data.slice(-numb)
+
+        let labels = []
+        data.forEach(e => {
+          labels.push(`${new Date(e.t).getDay() < 10 ? "0" + new Date(e.t).getDay() : new Date(e.t).getDay()} ${new Date(e.t).getHours().toString()}:${new Date(e.t).getMinutes() < 10 ? "0" + new Date(e.t).getMinutes(): new Date(e.t).getMinutes()}`)
+        });
+    
+        let donnes = []
+        data.forEach(e => {
+          donnes.push([e.o, e.c])
+        });
+    
+        let color = []
+        data.forEach(e => {
+          color.push(e.o < e.c ? "rgba(102, 196, 181, 0.7)" : "rgba(181, 83, 58, 0.7)")
+        });
+    
+        let borderColor = []
+        data.forEach(e => {
+          borderColor.push(e.o < e.c ? "rgb(102, 196, 181)" : "rgb(181, 83, 58)")
+        });
+    
+        const test = new ChartJsImage()
+        test.setConfig({
+          type: "bar",
+          data: {
+            labels: labels,
+            datasets: [{
+              label: instrument,
+              data: donnes,
+              backgroundColor: color,
+              borderColor: borderColor,
+              borderWidth: 2
+            }]
+          },
+          options: {
+            scales: {
+              yAxes: [{
+                gridLines: {
+                  color: 'rgba(38, 38, 38, 0.5)'
+                },
+                ticks: {
+                  maxTicksLimit: 10
+                }
+              }],
+              xAxes: [{
+                gridLines: {
+                  color: "rgba(38, 38, 38, 0.5)"
+                },
+                ticks: {
+                  maxTicksLimit: 10
+                }
+              }]
+            }
+          }
+        })
+        .setWidth(1000)
+        .setHeight(500)
+        .setBackgroundColor("Transparent")
+
+        embedChart.setImage(await test.getShortUrl())
+        .setTitle(`${numberWithCommas(data[data.length - 1].c)} US💰`)
+        .addFields([
+          {name: "Gains", value: (data[0].c > data[data.length - 1].c ? `🔴 -${(data[0].h - data[data.length - 1].c).toFixed(2)}` : `🟢 ${(data[data.length - 1].c - data[0].h).toFixed(2)}`) + ` (${(((data[data.length - 1].c - data[0].h) / data[0].h) * 100).toFixed(2)}%)`, inline: true},
+          {name: "Période", value: time, inline: true},
+          {name: "Nombre de donnée", value: numb, inline: true}
+        ])
+        .setColor(data[0].c < data[data.length - 1].c ? "#66c4b5" : "#b5533a")
+
+        if(lastChartMsg == null) {
+          channel.send(embedChart).then(sent => {
+            lastChartMsg = sent
+          })
+        }else{
+          lastChartMsg.edit(embedChart)
+        }
+      })
+    })
 }
 
 function deleteMsg(sent, message) {
@@ -115,32 +213,12 @@ let pasCompte = new Discord.MessageEmbed()
   .setColor(colorRouge)
 
 
-bot.on("ready", () => {
+bot.on("ready", async () => {
   console.log("bot online")
   console.log(new Date().toLocaleString())
   bot.user.setActivity(`${prefix}help`)
   variables[0].privProf = []
   fs.writeFileSync('./src/variable.json', JSON.stringify(variables), "utf8" , function(err) {
-    if(err) throw err;})
-})
-
-bot.on("presenceUpdate", (oldMember, newMember) => {
-  let online = false
-  switch (newMember.status) {
-    case "online":
-      online = true
-      break;
-
-    default :
-      online = false
-      break;
-  }
-  for (let i = 0; i < listeProfiles.length; i++) {
-    if(listeProfiles[i].name == newMember.member.displayName) {
-      listeProfiles[i].online = online
-    }
-  }
-  fs.writeFileSync('./src/data.json', JSON.stringify(listeProfiles), "utf8" , function(err) {
     if(err) throw err;})
 })
 
@@ -221,6 +299,9 @@ setInterval(() => {
   }
 
   bot.channels.cache.get(infoChanOff == undefined ? infoChanTest : infoChanOff).setTopic(topic)
+
+  if(lastChartMsg == null) return
+  msgChart(lastChart.inst, lastChart.time, lastChart.numb)
 }, 300000);
 
 setInterval(() => {
@@ -240,6 +321,26 @@ setInterval(() => {
     }
   }
 }, 5000);
+
+bot.on("presenceUpdate", (oldMember, newMember) => {
+  let online = false
+  switch (newMember.status) {
+    case "online":
+      online = true
+      break;
+
+    default :
+      online = false
+      break;
+  }
+  for (let i = 0; i < listeProfiles.length; i++) {
+    if(listeProfiles[i].name == newMember.member.displayName) {
+      listeProfiles[i].online = online
+    }
+  }
+  fs.writeFileSync('./src/data.json', JSON.stringify(listeProfiles), "utf8" , function(err) {
+    if(err) throw err;})
+})
 
 bot.on("message", async (message) => {
   if(message.author.bot) return
@@ -295,6 +396,44 @@ bot.on("message", async (message) => {
     listeProfiles.forEach(profil => {
       profil.money = "F"
     });
+  }
+
+  else if(cmd == "chart") {
+    if(!args[1]) args[1] = "5m"
+    if(!args[2]) args[2] = 100
+    let listePeriod = ["1m", "5m", "15m", "30m", "1h", "4h", "6h", "12h", "1D", "7D", "14D", "1M"]
+    if(args[2] > 250) return message.channel.send("Tu ne peut pas affiché plus de 250 données")
+    if(!listePeriod.includes(args[1])) return message.channel.send("Période non-disponible")
+
+    lastChartMsg = null
+    msgChart(args[0], args[1], args[2], message.channel)
+    lastChart = {inst: args[0], time: args[1], numb: args[2]}
+  }
+
+  else if(cmd == "invest") {
+    if(!args[0]) return
+    if(!args[1]) return message.channel.send("Quelle devise?")
+    if(isNaN(args[0])) return
+    for (let i = 0; i < listeProfiles.length; i++) {
+      if(listeProfiles[i].name == message.member.displayName) {
+        if(listeProfiles[i].moneyInvest == undefined) return
+        if(parseInt(args[0]) <= hexToInt(listeProfiles[i].money)) {
+          let instrument = null
+          axios.get("https://api.crypto.com/v2/public/get-instruments").then(async function (response) {
+            response.data.result.instruments.forEach(curr => {
+              if(curr.base_currency == args[1].toLocaleUpperCase()) {
+                if(curr.quote_currency == 'USDT') {
+                  instrument = curr.instrument_name
+                }
+              }
+            });
+            axios.get(`https://api.crypto.com/v2/public/get-candlestick?instrument_name=${instrument}&timeframe=1m`).then(response => {
+              console.log(response.data.result.data[response.data.result.data.length - 1].c)
+            })
+          })
+        }
+      }
+    }
   }
 
   else if(cmd == "prestige") {
